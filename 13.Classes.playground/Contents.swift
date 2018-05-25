@@ -186,6 +186,51 @@ extension Student {
 //// Structures vs. classes recap
 
 
+//// Chanlleges
+
+// 1
+class List {
+    var name: String
+    var titles: [String]
+    init(name: String, titles: [String]) {
+        self.name = name
+        self.titles = titles
+    }
+    
+    func print() -> String {
+        return titles.reduce("") { (result, movie) in
+            return result + movie + ","
+        }
+    }
+}
+
+var movieList = List(name: "list1", titles: ["a", "b", "c"])
+movieList.print()
+
+class User {
+    var dict: [String: List] = [:]
+    func addList(_ list: List) -> Void {
+        dict[list.name] = list
+    }
+    func list(forName name: String) -> List? {
+        return dict[name]
+    }
+}
+
+var jane1 = User()
+var john1 = User()
+jane1.addList(movieList)
+john1.addList(movieList)
+
+jane1.list(forName: "list1")!.print()
+john1.list(forName: "list1")!.print()
+
+jane1.list(forName: "list1")!.titles.append("d")
+jane1.list(forName: "list1")!.print()
+john1.list(forName: "list1")!.print()
+
+
+// 2
 
 
 
