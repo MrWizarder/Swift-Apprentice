@@ -97,5 +97,23 @@ hallMonitor as! BandMember
 (hallMonitor as! BandMember).minimumPracticeTime
 
 
+if let hallMonitor = hallMonitor as? BandMember {
+    print("This hall monitor is a band member and practices at least \(hallMonitor.minimumPracticeTime) hours per week")
+}
+
+func afterClasActivity(for student: BandMember) -> String {
+    return "Goes to practice!"
+}
+func afterClasActivity(for student: Student) -> String {
+    return "Goes home!"
+}
+
+
+afterClasActivity(for: oboePlayer)
+afterClasActivity(for: oboePlayer as Student)
+
+
+//// Inheritance, methods and overrides
+
 
 
