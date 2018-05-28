@@ -115,5 +115,82 @@ afterClasActivity(for: oboePlayer as Student)
 
 //// Inheritance, methods and overrides
 
+//class StudentAthlete: Student {
+//    var sports: [String]
+//    var failedClasses: [Grade] = []
+//
+//    init(firstName: String, lastName: String, sports: [String]) {
+//        self.sports = sports
+//        super.init(firstName: firstName, lastName: lastName)
+//    }
+//
+//    override func recordGrade(_ grade: Grade) {
+//        super.recordGrade(grade)
+//
+//        if grade.letter == "F" {
+//            failedClasses.append(grade)
+//        }
+//    }
+//
+//    var isEligible: Bool {
+//        return failedClasses.count < 3
+//    }
+//}
+
+
+//// Introducing super
+
+//// When to call super
+
+//// Preventing inheritance
+
+final class FinalStudent: Person {}
+//class FinalStudentAthlete: FinalStudent {}
+
+class AnotherStudent: Person {
+    final func recordGrade(_ grade: Grade) {}
+}
+
+class AnotherStudentAthlete: AnotherStudent {
+//    override func recordGrade(_ grade: Grade) {}
+}
+
+
+//// Inheritance and class initialization
+
+
+//// Two-phase initialization
+
+class StudentAthlete: Student {
+    var sports: [String]
+    var failedClasses: [Grade] = []
+    
+    init(firstName: String, lastName: String, sports: [String]) {
+        // 1
+        self.sports = sports
+        // 2
+        let passGrade = Grade(letter: "P", points: 0.0, credits: 0.0)
+        
+        // 3
+        super.init(firstName: firstName, lastName: lastName)
+        // 4
+        recordGrade(passGrade)
+    }
+    
+    override func recordGrade(_ grade: Grade) {
+        super.recordGrade(grade)
+        
+        if grade.letter == "F" {
+            failedClasses.append(grade)
+        }
+    }
+    
+    var isEligible: Bool {
+        return failedClasses.count < 3
+    }
+}
+
+
+//// Required and convenience initializers
 
 
