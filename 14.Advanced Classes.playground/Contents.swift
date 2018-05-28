@@ -15,10 +15,12 @@ class Person {
     var firstName: String
     var lastName: String
     
-    init(firstName: String, lastName: String) {
+    required init(firstName: String, lastName: String) {
         self.firstName = firstName
         self.lastName = lastName
     }
+    
+
 }
 
 //class Student {
@@ -38,6 +40,10 @@ class Person {
 
 class Student: Person {
     var grades: [Grade] = []
+ 
+    convenience init(transfer: Student) {
+        self.init(firstName: transfer.firstName, lastName: transfer.lastName)
+    }
     
     func recordGrade(_ grade: Grade) {
         grades.append(grade)
@@ -165,6 +171,11 @@ class StudentAthlete: Student {
     var sports: [String]
     var failedClasses: [Grade] = []
     
+    required init(firstName: String, lastName: String) {
+        self.sports = []
+        super.init(firstName: firstName, lastName: lastName)
+    }
+    
     init(firstName: String, lastName: String, sports: [String]) {
         // 1
         self.sports = sports
@@ -192,5 +203,25 @@ class StudentAthlete: Student {
 
 
 //// Required and convenience initializers
+
+
+//// When and why to subclass
+
+//// Strong types
+class Team {
+    var players: [StudentAthlete] = []
+    
+    var isEligible: Bool {
+        for player in players {
+            if !player.isEligible {
+                return false
+            }
+        }
+        return true
+    }
+}
+
+//// Shared base classes
+
 
 
