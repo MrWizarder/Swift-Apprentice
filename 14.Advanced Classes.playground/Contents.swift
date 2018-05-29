@@ -42,9 +42,14 @@ class Person {
 
 class Student: Person {
     var grades: [Grade] = []
+    weak var partner: Student?
  
     convenience init(transfer: Student) {
         self.init(firstName: transfer.firstName, lastName: transfer.lastName)
+    }
+    
+    deinit {
+        print("\(firstName) is being deallocated!")
     }
     
     func recordGrade(_ grade: Grade) {
@@ -280,6 +285,14 @@ someone = Person(firstName: "Johnny", lastName: "Appleseed")
 
 //// Retain cycles and weak references
 
+var alice: Student? = Student(firstName: "Alice", lastName: "Aplleseed")
+var bob: Student? = Student(firstName: "Bob", lastName: "Appleseed")
+
+alice?.partner = bob
+bob?.partner = alice
+
+alice = nil
+bob = nil
 
 
 
