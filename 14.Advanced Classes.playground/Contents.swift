@@ -20,7 +20,9 @@ class Person {
         self.lastName = lastName
     }
     
-
+    deinit {
+        print("\(firstName) \(lastName) is being removed from memory!")
+    }
 }
 
 //class Student {
@@ -249,6 +251,34 @@ class TextButton: Button {
     }
 }
 
+
+
+//// Understanding the class lifecycle
+
+var someone = Person(firstName: "Johnny", lastName: "Appleseed")
+// Person object has a reference count of 1 (someone variable)
+
+var anotherSomeone: Person? = someone
+// Reference count 2 (someone, anotherSomeone)
+
+var lotsOfPeople = [someone, someone, anotherSomeone, someone]
+// Reference count 6 (someone, anotherSomeone, 4 references in lotsOfPeople)
+
+anotherSomeone = nil
+// Reference count 5 (someone, 4 references in lotsOfPeople)
+
+lotsOfPeople = []
+// Reference count 1 (someone)
+
+someone = Person(firstName: "Johnny", lastName: "Appleseed")
+// Reference count 0 for the original Person object!
+// Variable someone now references a new object
+
+
+//// Deinitialization
+
+
+//// Retain cycles and weak references
 
 
 
