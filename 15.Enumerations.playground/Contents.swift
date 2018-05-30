@@ -40,8 +40,11 @@ let months = ["January", "February", "March", "April", "May",
 //    case december
 //}
 
-enum Month {
-    case january, february, march, april, may, june, july, august, september, october, november, decimber
+enum Month: Int {
+    case january = 1, february, march, april, may, june, july, august, september, october, november, decimber
+    var monthsUntilWinterBreak: Int {
+        return Month.decimber.rawValue - self.rawValue
+    }
 }
 
 
@@ -77,4 +80,26 @@ semester(for: month)
 
 
 //// Code completion prevents typos
+
+//// Raw values
+
+//func monthsUntilWinterBreak(from month: Month) -> Int {
+//    return Month.decimber.rawValue - month.rawValue
+//}
+//monthsUntilWinterBreak(from: .april)
+
+
+//// Initializing with the raw value
+
+let fifthMonth = Month(rawValue: 5)!
+//monthsUntilWinterBreak(from: fifthMonth)
+let monthsLeft = fifthMonth.monthsUntilWinterBreak
+
+
+//// String raw values
+
+
+
+
+
 
