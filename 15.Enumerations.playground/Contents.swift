@@ -119,10 +119,10 @@ enum Coin: Int {
     case penny = 1
     case nickel = 5
     case dime = 10
-    case quater = 25
+    case quarter = 25
 }
 
-let coin = Coin.quater
+let coin = Coin.quarter
 coin.rawValue
 
 
@@ -157,9 +157,73 @@ case .error(let message):
 }
 
 
+enum HTTPMethod {
+    case get
+    case post(body: String)
+}
+
+let request = HTTPMethod.post(body: "Hi there")
+guard case .post(let body) = request else {
+    fatalError("No message was posted")
+}
+print(body)
 
 
+//// Enumeration as state machine
 
+enum TrafficLight {
+    case red, yellow, green
+}
+let trafficLight = TrafficLight.red
+
+enum HouseholdLight {
+    case on, off
+}
+let householdLight = HouseholdLight.on
+
+
+//// Case-less enumerations
+
+enum Math {
+    static func factorial(of number: Int) -> Int {
+        return (1...number).reduce(1, *)
+    }
+}
+let factorial = Math.factorial(of: 6)
+
+//let math = Math()
+
+
+//// Optionals
+
+var age: Int?
+age = 17
+age = nil
+
+switch age {
+case .none:
+    print("No value")
+case .some(let value):
+    print("Got a value: \(value)")
+}
+
+
+let optionalNil: Int? = .none
+optionalNil == nil
+optionalNil == .none
+
+
+//// Challenges
+
+// 1
+let coinPurse: [Coin] = [.penny, .quarter, .nickel, .dime, .penny, .dime,
+                         .quarter]
+
+coinPurse.reduce(0) { x, y in
+    return x + y.rawValue
+}
+
+// 2
 
 
 
