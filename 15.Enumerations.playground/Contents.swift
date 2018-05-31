@@ -98,6 +98,67 @@ let monthsLeft = fifthMonth.monthsUntilWinterBreak
 
 //// String raw values
 
+// 1
+enum Icon: String {
+    case music
+    case sports
+    case weather
+    
+    var filename: String {
+        return "\(rawValue).png"
+    }
+}
+
+let icon = Icon.weather
+icon.filename
+
+
+//// Unordered raw values
+
+enum Coin: Int {
+    case penny = 1
+    case nickel = 5
+    case dime = 10
+    case quater = 25
+}
+
+let coin = Coin.quater
+coin.rawValue
+
+
+//// Associated values
+
+var balance = 100
+//func withdraw(amount: Int) {
+//    balance -= amount
+//}
+
+enum WithdrawResult {
+    case success(newBalance: Int)
+    case error(message: String)
+}
+
+func withdraw(amount: Int) -> WithdrawResult {
+    if amount <= balance {
+        balance -= amount
+        return .success(newBalance: balance)
+    } else {
+        return .error(message: "Not enough money!")
+    }
+}
+
+let result = withdraw(amount: 99)
+
+switch result {
+case .success(let newBalance):
+    print("Your new balance is: \(newBalance)")
+case .error(let message):
+    print(message)
+}
+
+
+
+
 
 
 
