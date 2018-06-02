@@ -259,4 +259,68 @@ copy.name
 
 //// Protocols in the standard library
 
+let a = 5
+let b = 5
+a == b
+
+let swiftA = "Swift"
+let swiftB = "Swift"
+swiftA == swiftB
+
+struct Record {
+    var wins: Int
+    var losses: Int
+}
+
+let recordA = Record(wins: 10, losses: 5)
+let recordB = Record(wins: 10, losses: 5)
+//recordA == recordB
+
+
+protocol Equatable {
+    static func ==(lhs: Self, rhs: Self) -> Bool
+}
+
+extension Record: Equatable {
+    static func ==(lhs: Record, rhs: Record) -> Bool {
+        return lhs.wins == rhs.wins &&
+            lhs.losses == rhs.losses
+    }
+}
+recordA == recordB
+
+
+//// Comparable
+
+protocol Comparable: Equatable {
+    static func <(lhs: Self, rhs: Self) -> Bool
+}
+
+extension Record: Comparable {
+    static func <(lhs: Record, rhs: Record) -> Bool {
+        if lhs.wins == rhs.wins {
+            return lhs.losses > rhs.losses
+        }
+        return lhs.wins < rhs.wins
+    }
+    static func <=(lhs: Record, rhs: Record) -> Bool {
+        return lhs < rhs || lhs == rhs
+    }
+}
+
+//// Free functions
+
+let teamA = Record(wins: 14, losses: 11)
+let teamB = Record(wins: 23, losses: 8)
+let teamC = Record(wins: 23, losses: 9)
+var leagueRecords = [teamA, teamB, teamC]
+
+//leagueRecords.sort()
+//leagueRecords.max()
+
+
+//// Other useful protocols
+
+
+
 
