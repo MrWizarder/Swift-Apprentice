@@ -294,6 +294,9 @@ recordA == recordB
 
 protocol Comparable: Equatable {
     static func <(lhs: Self, rhs: Self) -> Bool
+    static func <=(lhs: Self, rhs: Self) -> Bool
+    static func >=(lhs: Self, rhs: Self) -> Bool
+    static func >(lhs: Self, rhs: Self) -> Bool
 }
 
 extension Record: Comparable {
@@ -305,6 +308,12 @@ extension Record: Comparable {
     }
     static func <=(lhs: Record, rhs: Record) -> Bool {
         return lhs < rhs || lhs == rhs
+    }
+    static func >(lhs: Record, rhs: Record) -> Bool {
+        return !(lhs <= rhs)
+    }
+    static func >=(lhs: Record, rhs: Record) -> Bool {
+        return !(lhs < rhs)
     }
 }
 
@@ -322,5 +331,63 @@ var leagueRecords = [teamA, teamB, teamC]
 //// Other useful protocols
 
 
+// 1 Hashable
+
+//protocol Hashable : Equatable {
+//    var hashValue: Int { get }
+//}
+
+class Student {
+    let email: String
+    var firstName: String
+    var lastName: String
+    
+    init(email: String, firstName: String, lastName: String) {
+        self.email = email
+        self.firstName = firstName
+        self.lastName = lastName
+    }
+}
+
+extension Student: Equatable {
+    static func ==(lhs: Student, rhs: Student) -> Bool {
+        return lhs.email == rhs.email
+    }
+}
+
+extension Student: Hashable {
+    var hashValue: Int {
+        return email.hashValue
+    }
+}
+
+let john = Student(email: "johnny.appleseed@apple.com", firstName: "Johnny", lastName: "Appleseed")
+let lockerMap: [Student: String] = [john: "14B"]
+
+
+// 2 CustomStringConvertible
+
+//protocol CustomStringConvertible {
+//    var description: String { get }
+//}
+
+print(john)
+
+extension Student: CustomStringConvertible {
+    var description: String {
+        return "\(firstName) \(lastName)"
+    }
+}
+
+
+//// Challenges
+
+protocol pet {
+    static func fed() -> Void
+}
+
+protocol cageable: pet {
+    static func fly() -> Void
+}
 
 
