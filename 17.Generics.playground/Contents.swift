@@ -126,4 +126,8 @@ let animalAges: [Int] = [2,5,7,9]
 let animalAges1: Array<Int> = [2,5,7,9]
 
 
+//// Dictionaries
+
+//struct Dictionary<Key: Hashable, Value>
+
 
