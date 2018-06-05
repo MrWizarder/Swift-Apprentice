@@ -181,4 +181,12 @@ let swap = swapped(33, "Jay")
 swap.0
 
 
+//// Challenges
+
+// 1 Building a colection
+
+//let christine = Keeper<Cat>(name: "Christine")
+//christine.lookAfter(someCat)
+//christine.lookAfter(anotherCat)
+
 
