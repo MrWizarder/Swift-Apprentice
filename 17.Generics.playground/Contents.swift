@@ -130,4 +130,55 @@ let animalAges1: Array<Int> = [2,5,7,9]
 
 //struct Dictionary<Key: Hashable, Value>
 
+let intNames: Dictionary<Int, String> = [42: "forty-two"]
+
+let intName2: [Int: String] = [42: "forty-two", 7: "seven"]
+let intName3 = [42: "forty-two", 7: "seven"]
+
+
+//// Optionals
+
+enum OptionalDate {
+    case none
+    case some(Date)
+}
+
+enum OptionalString {
+    case none
+    case some(String)
+}
+
+struct FormResults {
+    var birthday: OptionalDate
+    var lastName: OptionalString
+}
+
+
+enum Optional<Wrapped> {
+    case none
+    case some(Wrapped)
+}
+
+//var birthdate: Optional<Date> = .none
+//if birthdate == .none {
+//
+//}
+
+var birthdate: Date? = nil
+if birthdate == nil {
+    
+}
+
+
+
+//// Generic function parameters
+
+func swapped<T, U>(_ x: T, _ y: U) -> (U, T) {
+    return (y, x)
+}
+
+let swap = swapped(33, "Jay")
+swap.0
+
+
 
