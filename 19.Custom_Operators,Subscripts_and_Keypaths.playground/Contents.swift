@@ -6,18 +6,18 @@ import UIKit
 
 infix operator **
 
-func **(base: Int, power: Int) -> Int {
-    precondition(power >= 2)
-    var result = base
-    for _ in 2...power {
-        result *= base
-    }
-    return result
-}
-
-let base = 2
+//func **(base: Int, power: Int) -> Int {
+//    precondition(power >= 2)
+//    var result = base
+//    for _ in 2...power {
+//        result *= base
+//    }
+//    return result
+//}
+//
+//let base = 2
 let exponent = 2
-let result = base ** exponent
+//let result = base ** exponent
 
 
 //// Compound assignment operator
@@ -25,12 +25,12 @@ let result = base ** exponent
 
 infix operator **=
 
-func **=(lhs: inout Int, rhs: Int) {
-    lhs = lhs ** rhs
-}
-
-var number = 2
-number **= exponent
+//func **=(lhs: inout Int, rhs: Int) {
+//    lhs = lhs ** rhs
+//}
+//
+//var number = 2
+//number **= exponent
 
 
 //// Generic operators
@@ -80,6 +80,12 @@ let unsignedResult64 = unsignedBase64 ** exponent
 
 //// Precedence and associativity
 
+precedencegroup ExponentiationPrecedence {
+associativity: right
+higherThan: MultiplicationPrecedence
+}
+
+//infix operator **: ExponentiationPrecedence
 
 
 
@@ -87,4 +93,142 @@ let unsignedResult64 = unsignedBase64 ** exponent
 
 
 
+
+
+//// Subscripts
+
+//subscript(parameterList) -> ReturnType {
+//    get {
+//        // return someValue of ReturnType
+//    }
+//
+//    set(newValue) {
+//        // set someValue of ReturnType to newValue
+//    }
+//}
+
+
+class Person {
+    let name: String
+    let age: Int
+    
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+}
+
+let me = Person(name: "Cosmin", age: 31)
+
+extension Person {
+    subscript(key: String) -> String? {
+        switch key {
+        case "name":
+            return name
+        case "age":
+            return "\(age)"
+        default:
+            return nil
+        }
+    }
+}
+
+me["name"]
+me["age"]
+me["gender"]
+
+//// Subscript parameters
+
+extension Person {
+    subscript(key key: String) -> String? {
+        switch key {
+        case "name":
+            return name
+        case "age":
+            return "\(age)"
+        default:
+            return nil
+        }
+    }
+}
+
+me[key: "name"]
+me[key: "age"]
+me[key: "gender"]
+
+
+extension Person {
+    subscript(property key: String) -> String? {
+        switch key {
+        case "name":
+            return name
+        case "age":
+            return "\(age)"
+        default:
+            return nil
+        }
+    }
+}
+
+me[property: "name"]
+me[property: "age"]
+me[property: "gender"]
+
+
+
+
+
+
+//// Keypaths
+
+class Tutorial {
+    let title: String
+    let author: Person
+    let type: String
+    let publishDate: Date
+    
+    init(title: String, author: Person, type: String, publishDate: Date) {
+        self.title = title
+        self.author = author
+        self.type = type
+        self.publishDate = publishDate
+    }
+}
+
+let tutorial = Tutorial(title: "Object Oriented Programming in Swift", author: me, type: "Swift", publishDate: Date())
+
+let title = \Tutorial.title
+let tutorialTitle = tutorial[keyPath: title]
+
+let authorName = \Tutorial.author.name
+var tutorialAuthor = tutorial[keyPath: authorName]
+
+
+//// Appending keypaths
+
+let authorPath = \Tutorial.author
+let authorNamePath = authorPath.appending(path: \.name)
+tutorialAuthor = tutorial[keyPath: authorNamePath]
+
+
+//// Setting properties
+
+class Jukebox {
+    var song: String
+    
+    init(song: String) {
+        self.song = song
+    }
+}
+
+let jukebox = Jukebox(song: "Nothing else matters")
+
+let song = \Jukebox.song
+jukebox[keyPath: song] = "Stairway to heaven"
+
+
+
+//// Challenges
+
+// 1
 
