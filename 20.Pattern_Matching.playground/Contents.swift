@@ -304,5 +304,52 @@ if a != b,
 
 
 
+//// Custom tuple
+
+let name = "Bob"
+let age = 23
+
+if case ("Bob", 23) = (name, age) {
+    print("Found the right Bob!")
+}
+
+
+var username: String?
+var password: String?
+
+switch (username, password) {
+case let (username?, password?):
+    print("Success! User: \(username) Pass: \(password)")
+case let (username?, nil):
+    print("Password is missing. User: \(username)")
+case let (nil, password?):
+    print("Username is missing. Pass: \(password)")
+case (nil, nil):
+    print("Both username and password are missing")
+}
+
+
+//// Fun with wildcards
+
+//// Do something multiple times
+for _ in 1...3 {
+    print("hi")
+}
+
+//// Validate that an optional exists
+let user: String? = "Bob"
+guard let _ = user else {
+    print("There is no user.")
+    fatalError()
+}
+print("User exists, but identity not needed.")
+
+guard user != nil else {
+    print("There is no user.")
+    fatalError()
+}
+
+
+
 
 
