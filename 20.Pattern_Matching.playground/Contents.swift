@@ -350,6 +350,31 @@ guard user != nil else {
 }
 
 
+//// Organize an if-else-if
+
+struct Rectangle {
+    let width: Int
+    let height: Int
+    let color: String
+}
+
+let view = Rectangle(width: 15, height: 60, color: "Green")
+switch view {
+case _ where view.height < 50:
+    print("Shorter than 50 units")
+case _ where view.width > 20:
+    print("Over 50 tall, & over 20 wide")
+case _ where view.color == "Green":
+    print("Over 50 tall, at most 20 width, &green")
+default:
+    print("This view can't be described by this example")
+}
+
+
+
+//// Progamming exercises
+
+
 
 
 
