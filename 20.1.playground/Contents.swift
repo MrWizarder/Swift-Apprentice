@@ -76,3 +76,72 @@ for level in levels {
 }
 
 
+
+
+//// Chaining with commas
+
+func timeOfDayDescription(hour: Int) -> String {
+    switch hour {
+    case 0, 1, 2, 3, 4, 5:
+        return "Early morning"
+    case 6, 7, 8, 9, 10, 11:
+        return "Morning"
+    case 12, 13, 14, 15, 16:
+        return "Afternoon"
+    case 17, 18, 19:
+        return "Evening"
+    case 20, 21, 22, 23:
+        return "Late evening"
+    default:
+        return "INVALID HOUR!"
+    }
+}
+let timeOfDay = timeOfDayDescription(hour: 12)
+
+
+//if case .animal(let legs) = pet, case 2...4 = legs {
+//    print("potentially cuddly")
+//} else {
+//    print("no chance for cuddles")
+//}
+
+
+enum Number {
+    case integerValue(Int)
+    case doubleValue(Double)
+    case booleanValue(Bool)
+}
+
+let a = 5
+let b = 6
+let c: Number? = .integerValue(7)
+let d: Number? = .integerValue(8)
+
+if a != b {
+    if let c = c {
+        if let d = d {
+            if case .integerValue(let cValue) = c {
+                if case .integerValue(let dValue) = d {
+                    if dValue > cValue {
+                        print("a and b are different")
+                        print("d is greater than c")
+                        print("sum: \(a + b + cValue + dValue)")
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+if a != b,
+    let c = c,
+    let d = d,
+    case .integerValue(let cValue) = c,
+    case .integerValue(let dValue) = d,
+    dValue > cValue {
+    print("a and b are different")
+    print("d is greater than c")
+    print("sum: \(a + b + cValue + dValue)")
+}
