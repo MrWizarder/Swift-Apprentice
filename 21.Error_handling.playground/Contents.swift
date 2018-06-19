@@ -123,3 +123,23 @@ class Person {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//// Error protocol
+
+
