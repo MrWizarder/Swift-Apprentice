@@ -162,3 +162,23 @@ for pet in betterPetNames {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//// Error protocol
+
+
