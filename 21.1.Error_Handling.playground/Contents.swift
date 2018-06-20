@@ -215,3 +215,35 @@ moveSafely {
 
 
 
+/// Rethrows
+
+func perform(times: Int, movement: () throws -> ()) rethrows {
+    for _ in 1...times {
+        try movement()
+    }
+}
+
+
+
+//// Challenges
+
+// 1
+
+extension CGAffineTransform {
+    var isInvertable: Bool {
+        return abs(a*d - b*c) > CGFloat.ulpOfOne
+    }
+}
+
+CGAffineTransform().isInvertable
+CGAffineTransform.identity.isInvertable
+
+extension CGAffineTransform: CustomStringConvertible {
+    public var description: String {
+        return [a, b, c, d, tx, ty].reduce("") { $0 + " \($1) "}
+    }
+}
+
+
+
+
