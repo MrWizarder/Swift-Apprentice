@@ -118,6 +118,45 @@ class Person {
 }
 
 
+let janie = Person(pet: Pet(name: "Delia", kind: .dog, favoriteToy: Toy(kind: .ball, color: "Purple", sound: .bell)))
+let tammy = Person(pet: Pet(name: "Evil Cat overlord", kind: .cat, favoriteToy: Toy(kind: .mouse, color: "Orange")))
+let felipe = Person()
+
+if let sound = janie.pet?.favoriteToy?.sound {
+    print("Sound \(sound)")
+} else {
+    print("No sound.")
+}
+
+if let sound = tammy.pet?.favoriteToy?.sound {
+    print("Sound \(sound)")
+} else {
+    print("No sound.")
+}
+
+if let sound = felipe.pet?.favoriteToy?.sound {
+    print("Sound \(sound)")
+} else {
+    print("No sound.")
+}
+
+
+
+
+//// Map and flatMap
+
+let team = [janie, tammy, felipe]
+
+
+let petNames = team.map  { $0.pet?.name }
+for pet in petNames {
+    print(pet)
+}
+
+let betterPetNames = team.flatMap() { $0.pet?.name }
+for pet in betterPetNames {
+    print(pet)
+}
 
 
 
