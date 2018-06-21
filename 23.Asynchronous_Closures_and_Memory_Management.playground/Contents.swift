@@ -10,6 +10,10 @@ class Tutorial {
     let title: String
     unowned let author: Author
     weak var editor: Editor?
+    lazy var createDescription: () -> String = {
+        [unowned self] in
+        return "\(self.title) by \(self.author.name)"
+    }
     
     init(title: String, author: Author) {
         self.title = title
@@ -55,6 +59,8 @@ do {
     author.tutorials.append(tutorial)
     tutorial.editor = editor
     editor.tutorials.append(tutorial)
+    
+    print(tutorial.createDescription())
 }
 
 //// Weak references
@@ -64,3 +70,40 @@ do {
 
 
 //// Reference cycles for closures
+
+// non escaping closures
+
+
+//// Capture lists
+
+var counter = 0
+var closure = { [counter] in print(counter) }
+counter = 1
+closure()
+
+
+//// Unowned self
+
+
+
+
+//// Handling asynchronous closures
+
+//Note: Swift initialization of global data and reference counting are thread safe so you don’t need to worry about those fundamental things.
+
+
+//// GCD
+
+func log(message: String) {
+    let thread = Thread.current.isMainThread ? "Main" : "Background"
+    print("\(thread) thread: \(message)")
+}
+
+func addNumbers(upTo range: Int) -> Int {
+    log(message: "Adding numbers...")
+    return (1...range).reduce(0, +)
+}
+
+
+let queue = DispatchQueue(label: "queue")
+
