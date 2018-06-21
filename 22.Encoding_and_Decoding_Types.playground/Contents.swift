@@ -120,3 +120,33 @@ let employee2 = try jsonDecoder.decode(Employee.self, from: jsonData)
 
 
 
+
+//// Challenges
+
+// 1
+
+struct Spaceship: Codable {
+    var name: String
+    var crew: [Spaceman]
+    
+    enum CodingKeys: String, CodingKey {
+        case name = "spaceship_name"
+        case crew
+    }
+}
+
+struct Spaceman: Codable {
+    var name: String
+    var race: String
+}
+
+let spaceman = Spaceman(name: "Worf", race: "Klingon")
+let spaceship = Spaceship(name: "USS Enterprise", crew: [spaceman])
+
+let jsonEncoder1 = JSONEncoder()
+let jsonData1 =  try jsonEncoder1.encode(spaceship)
+let jsonString1 = String(data: jsonData1, encoding: .utf8)
+print(jsonString1!)
+
+
+
