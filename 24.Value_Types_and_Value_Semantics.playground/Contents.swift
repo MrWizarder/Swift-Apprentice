@@ -53,3 +53,34 @@ wallBluePaint.isRefilled
 //// Value types
 
 // assign-by-copy
+
+
+extension Color {
+    mutating func darken() {
+        red *= 0.9; green *= 0.9; blue *= 0.9
+    }
+}
+
+var azure = Color.blue
+var wallBlue = azure
+azure
+wallBlue.darken()
+azure
+
+
+
+//// Defining value semantics
+
+
+//var x = MysteryType()
+//var y = x
+//exposeValue(x) // => initial value derived from x
+//// {code here which uses only y}
+//exposeValue(x) // => final value derived from x
+//// Q: are the initial and final values different?
+
+
+
+//// When to prefer value semantics
+
+
