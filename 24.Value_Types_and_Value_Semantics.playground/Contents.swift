@@ -84,3 +84,17 @@ azure
 //// When to prefer value semantics
 
 
+
+
+
+//// Implementing value semantics
+
+//// Case 1. Primitive value types
+
+//// Case 2. Composite value types
+
+//// Case 3. Reference types
+
+
+
+
