@@ -104,6 +104,20 @@ azure
 
 //// case4. Value types containing mutable reference types
 
+struct PaintingPlan {
+    // a value type
+    var accent = Color.white
+    // a mutable reference type
+    var bucket = Bucket(color: .blue)
+}
+
+var artPlan = PaintingPlan()
+var housePlan = artPlan
+artPlan.bucket.color
+housePlan.bucket.color = Color.green
+artPlan.bucket.color
+
+//// Copy-on-write to the rescue
 
 
 
