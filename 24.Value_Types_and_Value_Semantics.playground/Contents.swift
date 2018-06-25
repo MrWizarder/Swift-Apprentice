@@ -95,6 +95,16 @@ azure
 
 //// Case 3. Reference types
 
+//var a = UIImage(named:"smile.jpg")
+//var b = a
+//computeValue(b)
+//doSomething(a)
+//computeValue(b)
+
+
+//// case4. Value types containing mutable reference types
+
+
 
 
 
