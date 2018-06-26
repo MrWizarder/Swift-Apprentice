@@ -104,21 +104,57 @@ azure
 
 //// case4. Value types containing mutable reference types
 
-struct PaintingPlan {
+struct PaintingPlan {   // a value type, containing ...
     // a value type
     var accent = Color.white
     // a mutable reference type
-    var bucket = Bucket(color: .blue)
+    private var bucket = Bucket(color: .blue)
+    
+    // a pseudo-value type, using the deep storage
+    // a computed property facade over deep storage
+    // with copy-on-write and in-place mutation when possible
+    var bucketColor: Color {
+        get {
+            return bucket.color
+        }
+        set {
+            if isKnownUniquelyReferenced(&bucket) {
+                bucket.color = bucketColor
+            } else {
+                bucket = Bucket(color: newValue)
+            }
+        }
+    }
 }
 
 var artPlan = PaintingPlan()
 var housePlan = artPlan
-artPlan.bucket.color
-housePlan.bucket.color = Color.green
-artPlan.bucket.color
+//artPlan.bucket.color
+//housePlan.bucket.color = Color.green
+//artPlan.bucket.color
 
 //// Copy-on-write to the rescue
 
+artPlan.bucketColor
+housePlan.bucketColor = .green
+artPlan.bucketColor
 
+
+
+//// Beyond copy-on-write
+
+func mightModify(x: inout Int, addRun f: () -> ()) { }
+var i: Int = 0
+
+
+
+//// Recipes for value semantics
+
+
+
+
+
+
+//// Challenges
 
 
