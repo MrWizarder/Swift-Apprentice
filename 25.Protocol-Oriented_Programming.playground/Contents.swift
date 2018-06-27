@@ -299,6 +299,42 @@ struct NewHockeyRecord: TeamRecord, TieableRecord, DivisionalRecord, CustomStrin
 //// Why Swift is a protocol-oriented language
 
 
+// From the Swift standard library
+//public struct Array<Element> : RandomAccessCollection, MutableCollection
+//{
+//    // ...
+//}
+
+
+//Note: More neutral-minded Swift developers will call Swift a “multi-paradigm” language. You’ve already seen inheritance and object-oriented techniques, and now protocol-oriented programming; Swift easily handles both!
+
+
+
+
+//// Challenges
+
+// 1
+
+protocol Item {
+    var name: String { get }
+    var clearance: Bool { get }
+    var msrp: Double { get }
+    var totalPrice: Double { get }
+}
+
+protocol Tax {
+    var tax: Double { get }
+}
+
+extension Tax {
+    var tax: Double {
+        return 0.75
+    }
+}
+
+
+
+
 
 
 
